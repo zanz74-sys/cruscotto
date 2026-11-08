@@ -1,0 +1,7 @@
+{
+  "name": "cruscotto",
+  "owner": { "name": "zanz74-sys" },
+  "plugins": [
+    { "name": "cruscotto", "source": "./", "description": "Riquadro con stato della chat" }
+  ]
+}
