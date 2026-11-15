@@ -48,11 +48,12 @@ test('barre, token e limiti: riga in VS Code e mobile, zona fissa altrove', asyn
     expect(await ui.find({ type: 'Text', text: /^91 kt$/ })).toBeDefined()
     expect(await ui.find({ type: 'Text', text: /^70%$/ })).toBeDefined()
     expect(await ui.find({ type: 'Text', text: /^90%$/ })).toBeDefined()
-    if (prova.surface === 'terminal') {
+    if (prova.surface === 'desktop') {
+      expect(await ui.findAll({ type: 'Svg' })).toHaveLength(3)
+    } else {
+      expect(await ui.findAll({ type: 'Svg' })).toHaveLength(0)
       expect((await ui.find({ type: 'Text', text: /━/ }))?.text).toBe('━━━━━')
       expect((await ui.find({ type: 'Text', text: /─/ }))?.text).toBe('─────')
-    } else {
-      expect(await ui.findAll({ type: 'Svg' })).toHaveLength(3)
     }
     expect(await ui.find({ type: 'Text', text: /2 h 14 min/ })).toBeDefined()
     expect(await ui.find({ type: 'Text', text: /\$|1,27/ })).toBeUndefined()
@@ -72,7 +73,7 @@ test('barre verdi, gialle dal 70%, rosse dal 90%', async ($, on) => {
     }),
   }))
 
-  const ui = await $.ui.mount({ ...riga('riga-0'), surface: 'vscode' })
+  const ui = await $.ui.mount({ ...SOPRA, surface: 'desktop' })
 
   expect((await ui.find({ type: 'Text', text: /69%/ }))?.props.color).toBe('success')
   expect((await ui.find({ type: 'Text', text: /70%/ }))?.props.color).toBe('warning')

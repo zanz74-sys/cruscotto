@@ -64,7 +64,8 @@ const disegna = async (
 ) => {
   const tabella = $.ui.resolve(e)
   const { Box, Text } = tabella
-  const Svg = e.surface !== 'terminal' && 'Svg' in tabella ? tabella.Svg : undefined
+  // VS Code disegna l'Svg come immagine e a volte non la carica, mostrando l'alt: lì barra di testo.
+  const Svg = e.surface === 'desktop' && 'Svg' in tabella ? tabella.Svg : undefined
   await read($, tick)
   const ultima = await read($, ultimaRisposta)
   const adesso = await $.clock.now()
