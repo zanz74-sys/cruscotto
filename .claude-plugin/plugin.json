@@ -1,6 +1,6 @@
 {
   "name": "cruscotto",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Riquadro con stato della chat: memoria, limiti di uso, durata sessione, cache, tool",
   "license": "MIT",
   "types": "./types/index.d.ts"

@@ -64,8 +64,8 @@ const disegna = async (
 ) => {
   const tabella = $.ui.resolve(e)
   const { Box, Text } = tabella
-  // VS Code disegna l'Svg come immagine e a volte non la carica, mostrando l'alt: lì barra di testo.
-  const Svg = e.surface === 'desktop' && 'Svg' in tabella ? tabella.Svg : undefined
+  // VS Code a volte non carica l'immagine e mostra l'alt: per questo l'alt è la barra di testo.
+  const Svg = e.surface !== 'terminal' && 'Svg' in tabella ? tabella.Svg : undefined
   await read($, tick)
   const ultima = await read($, ultimaRisposta)
   const adesso = await $.clock.now()
@@ -121,7 +121,10 @@ const disegna = async (
             {Svg ? (
               <Svg
                 source={svgBarra(r.percento ?? 0)}
-                alt={r.percento === undefined ? 'nessun dato' : `barra ${r.percento}%`}
+                alt={
+                  '━'.repeat(celleTerminale(r.percento ?? 0)) +
+                  '─'.repeat(CELLE - celleTerminale(r.percento ?? 0))
+                }
                 width={BARRA_L}
                 height={BARRA_H}
               />
